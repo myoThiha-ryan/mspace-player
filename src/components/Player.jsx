@@ -2,8 +2,18 @@ import React, { useContext } from "react";
 import { assets, songsData } from "../assets/frontend-assets/assets";
 import { PlayerContext } from "../context/PlayerContext";
 const Player = () => {
-  const { seekBar, seekBg, play, pause, playStatus, track, time } =
-    useContext(PlayerContext);
+  const {
+    seekBar,
+    seekBg,
+    play,
+    pause,
+    playStatus,
+    track,
+    time,
+    previous,
+    next,
+    seekSong,
+  } = useContext(PlayerContext);
 
   return (
     <div className="h-[10%] bg-black flex justify-between items-center text-white px-4 ">
@@ -21,7 +31,12 @@ const Player = () => {
             src={assets.shuffle_icon}
             alt=""
           />
-          <img className="w-4 cursor-pointer" src={assets.prev_icon} alt="" />
+          <img
+            onClick={previous}
+            className="w-4 cursor-pointer"
+            src={assets.prev_icon}
+            alt=""
+          />
           {playStatus ? (
             <img
               onClick={pause}
@@ -37,7 +52,12 @@ const Player = () => {
               alt=""
             />
           )}
-          <img className="w-4 cursor-pointer" src={assets.next_icon} alt="" />
+          <img
+            onClick={next}
+            className="w-4 cursor-pointer"
+            src={assets.next_icon}
+            alt=""
+          />
           <img className="w-4 cursor-pointer" src={assets.loop_icon} alt="" />
         </div>
         <div className="flex items-center gap-5">
@@ -45,6 +65,7 @@ const Player = () => {
             {time.currentTime.minute}:{time.currentTime.second}
           </p>
           <div
+            onClick={seekSong}
             ref={seekBg}
             className="w-[60vw] max-w-[500px] bg-gray-300 rounded-full cursor-pointer"
           >
